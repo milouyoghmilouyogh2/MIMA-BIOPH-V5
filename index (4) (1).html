@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<title>Dr Mehanneche Oumaima — 1ère Année Médecine</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=DM+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<!-- ════════════════════════════════════
+     SIDEBAR
+════════════════════════════════════ -->
+<aside class="sidebar" id="sidebar">
+  <div class="sidebar-header">
+    <div class="sidebar-logo">
+      <div class="logo-icon">⚕️</div>
+      <div class="logo-text">
+        <div class="logo-title">Dr Mehanneche Oumaima</div>
+        <div class="logo-sub">1ère Année Médecine</div>
+      </div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav" id="sidebar-nav">
+    <button class="nav-item active" data-page="dashboard">
+      <span class="nav-icon">📊</span>
+      <span class="nav-label" data-i18n="nav.dashboard">Tableau de bord</span>
+    </button>
+    <div class="nav-group-label" data-i18n="nav.courses">COURS</div>
+    <button class="nav-item" data-page="optique">
+      <span class="nav-icon">🔬</span>
+      <span class="nav-label" data-i18n="nav.optics">Optique Géométrique</span>
+      <span class="nav-badge-dot exam"></span>
+    </button>
+    <button class="nav-item" data-page="rayonnement">
+      <span class="nav-icon">☢️</span>
+      <span class="nav-label" data-i18n="nav.radiation">Rayonnement</span>
+      <span class="nav-badge-dot exam"></span>
+    </button>
+    <div class="nav-group-label" data-i18n="nav.practice">PRATIQUE</div>
+    <button class="nav-item" data-page="methodes">
+      <span class="nav-icon">🧩</span>
+      <span class="nav-label" data-i18n="nav.methods">Méthodes Pas-à-Pas</span>
+    </button>
+    <button class="nav-item" data-page="pieges">
+      <span class="nav-icon">🚨</span>
+      <span class="nav-label" data-i18n="nav.traps">Pièges Fréquents</span>
+    </button>
+    <button class="nav-item" data-page="exam">
+      <span class="nav-icon">🎯</span>
+      <span class="nav-label" data-i18n="nav.exam">Simulation Examen</span>
+      <span class="nav-badge" id="badge-exam" style="display:none">!</span>
+    </button>
+    <div class="nav-group-label" data-i18n="nav.ai">INTELLIGENCE</div>
+    <button class="nav-item" data-page="ia">
+      <span class="nav-icon">🤖</span>
+      <span class="nav-label" data-i18n="nav.ai_assistant">IA Assistant</span>
+      <span class="nav-badge green" style="display:inline-flex">IA</span>
+    </button>
+  </nav>
+
+  <div class="sidebar-footer">
+    <button class="footer-btn" id="langBtn" title="Switch language">
+      <span id="langIcon">🇫🇷</span>
+      <span id="langLabel">FR</span>
+    </button>
+    <button class="footer-btn" id="themeBtn" title="Toggle theme">
+      <span id="themeIcon">🌙</span>
+    </button>
+    <button class="footer-btn" id="focusBtn" title="Focus mode">
+      <span>🎯</span>
+    </button>
+  </div>
+</aside>
+
+<!-- Overlay for mobile -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+<!-- ════════════════════════════════════
+     MAIN LAYOUT
+════════════════════════════════════ -->
+<div class="layout" id="layout">
+
+  <!-- Top bar (mobile only) -->
+  <header class="topbar" id="topbar">
+    <button class="hamburger" id="hamburger" aria-label="Menu">
+      <span></span><span></span><span></span>
+    </button>
+    <div class="topbar-brand">
+      <span class="topbar-title">Dr Mehanneche Oumaima</span>
+    </div>
+    <div class="topbar-right">
+      <div class="online-dot" id="online-dot" title="Status"></div>
+    </div>
+  </header>
+
+  <!-- ── MAIN PAGES ── -->
+  <main class="main" id="main">
+
+    <!-- PAGE: DASHBOARD -->
+    <section class="page active" id="pg-dashboard">
+      <div class="page-header">
+        <h1 class="page-title" data-i18n="dashboard.title">Tableau de bord</h1>
+        <p class="page-sub" data-i18n="dashboard.sub">Suivi de ta progression en temps réel</p>
+      </div>
+      <div class="grid-4 mb-16" id="db-stats-grid"></div>
+      <div class="card card--gradient mb-16">
+        <div class="card-label" data-i18n="dashboard.ai_rec">🤖 Recommandations IA</div>
+        <div id="db-recommendations" class="text-body"></div>
+      </div>
+      <div id="db-weak-section" class="hidden mb-16">
+        <div class="section-title" data-i18n="dashboard.weak">📉 Points faibles détectés</div>
+        <div id="db-weak-list"></div>
+      </div>
+      <div class="section-title" data-i18n="dashboard.quick">🚀 Accès rapide</div>
+      <div class="grid-2 mb-16" id="db-quick-grid"></div>
+      <div class="card card--amber">
+        <div class="card-label" data-i18n="dashboard.pareto">⚡ Règle de Pareto 80/20 — Priorités Examen</div>
+        <div class="mt-8" id="priority-badges"></div>
+      </div>
+    </section>
+
+    <!-- PAGE: OPTIQUE -->
+    <section class="page" id="pg-optique">
+      <div class="page-header">
+        <h1 class="page-title">🔬 <span data-i18n="nav.optics">Optique Géométrique</span></h1>
+        <p class="page-sub">Cours complet · Université Oum El Bouaghi</p>
+      </div>
+      <div id="optique-content"></div>
+    </section>
+
+    <!-- PAGE: RAYONNEMENT -->
+    <section class="page" id="pg-rayonnement">
+      <div class="page-header">
+        <h1 class="page-title">☢️ <span data-i18n="nav.radiation">Rayonnement Biophysique</span></h1>
+        <p class="page-sub">Structure nucléaire · Rayons X · Radioactivité · De Broglie</p>
+      </div>
+      <div id="rayonnement-content"></div>
+    </section>
+
+    <!-- PAGE: MÉTHODES -->
+    <section class="page" id="pg-methodes">
+      <div class="page-header">
+        <h1 class="page-title">🧩 <span data-i18n="nav.methods">Méthodes de Résolution</span></h1>
+        <p class="page-sub" data-i18n="methods.sub">7 méthodes pas-à-pas pour l'examen</p>
+      </div>
+      <div id="methodes-content"></div>
+    </section>
+
+    <!-- PAGE: PIÈGES -->
+    <section class="page" id="pg-pieges">
+      <div class="page-header">
+        <h1 class="page-title">🚨 <span data-i18n="nav.traps">Pièges Fréquents</span></h1>
+        <p class="page-sub" data-i18n="traps.sub">16 erreurs critiques · À mémoriser absolument</p>
+      </div>
+      <div id="pieges-content"></div>
+    </section>
+
+    <!-- PAGE: EXAMEN -->
+    <section class="page" id="pg-exam">
+      <div class="page-header">
+        <h1 class="page-title">🎯 <span data-i18n="nav.exam">Simulation Examen</span></h1>
+        <p class="page-sub" data-i18n="exam.sub">20 QCM type EMD 2024/2025 · 0.5 pt/question</p>
+      </div>
+
+      <!-- Timer Controls -->
+      <div class="card card--glass mb-16" id="exam-controls">
+        <div class="card-label" data-i18n="exam.timer_label">⏱️ Paramètres du timer</div>
+        <div class="timer-controls">
+          <label class="radio-pill">
+            <input type="radio" name="timer-mode" value="off" checked>
+            <span data-i18n="exam.timer_off">Sans timer</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="timer-mode" value="global">
+            <span data-i18n="exam.timer_global">Global (40 min)</span>
+          </label>
+          <label class="radio-pill">
+            <input type="radio" name="timer-mode" value="perq">
+            <span data-i18n="exam.timer_perq">Par question (2 min)</span>
+          </label>
+        </div>
+        <div class="btn-row mt-8">
+          <button class="btn btn--primary" id="examStartBtn" data-i18n="exam.start">▶ Démarrer l'examen</button>
+        </div>
+      </div>
+
+      <!-- Timer display -->
+      <div class="timer-display hidden" id="timer-display">
+        <div class="timer-ring" id="timer-ring">
+          <svg viewBox="0 0 100 100">
+            <circle class="timer-track" cx="50" cy="50" r="44"/>
+            <circle class="timer-fill" id="timer-arc" cx="50" cy="50" r="44"/>
+          </svg>
+          <div class="timer-text" id="timer-text">--:--</div>
+        </div>
+        <div class="timer-info" id="timer-info"></div>
+      </div>
+
+      <!-- Score box -->
+      <div class="score-box hidden" id="score-box">
+        <div class="score-inner">
+          <div class="score-emoji" id="score-emoji">—</div>
+          <div class="score-num" id="score-num">—</div>
+          <div class="score-label" id="score-label">—</div>
+        </div>
+        <div class="progress-track mt-12">
+          <div class="progress-fill" id="score-bar" style="width:0%"></div>
+        </div>
+        <div class="btn-row mt-12 justify-center">
+          <button class="btn btn--primary" id="analyzeBtn" data-i18n="exam.analyze">🤖 Analyser mes erreurs</button>
+          <button class="btn btn--ghost" id="examResetBtn" data-i18n="exam.reset">↺ Recommencer</button>
+        </div>
+        <div class="ai-response" id="ai-error-analysis"></div>
+      </div>
+
+      <!-- QCM card area -->
+      <div id="exam-area" class="hidden">
+        <div class="qcm-progress-bar">
+          <div class="qcm-progress-fill" id="qcm-progress-fill"></div>
+        </div>
+        <div class="qcm-counter" id="qcm-counter">Q1 / 20</div>
+        <div id="qcm-card-area"></div>
+        <div class="btn-row justify-center mt-16" id="exam-nav-btns">
+          <button class="btn btn--ghost hidden" id="examPrevBtn" data-i18n="exam.prev">← Précédent</button>
+          <button class="btn btn--primary" id="examNextBtn" data-i18n="exam.next">Suivant →</button>
+          <button class="btn btn--primary hidden" id="examFinishBtn" data-i18n="exam.finish">✓ Terminer l'examen</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- PAGE: IA ASSISTANT -->
+    <section class="page" id="pg-ia">
+      <div class="page-header">
+        <h1 class="page-title">🤖 <span data-i18n="nav.ai_assistant">IA Assistant</span></h1>
+        <p class="page-sub" data-i18n="ia.sub">Diagnostic · Flash Cards · Statistiques personnalisées</p>
+      </div>
+
+      <div class="ai-tabs" role="tablist">
+        <button class="ai-tab active" data-tab="diag" data-i18n="ia.tab_diag">🎯 Diagnostic</button>
+        <button class="ai-tab" data-tab="flash" data-i18n="ia.tab_flash">🔁 Flash Cards</button>
+        <button class="ai-tab" data-tab="stats" data-i18n="ia.tab_stats">📊 Statistiques</button>
+      </div>
+
+      <!-- Diagnostic -->
+      <div class="ai-sub active" id="ia-diag">
+        <div class="card card--gradient">
+          <div class="card-label" data-i18n="ia.diag_title">🎯 Diagnostic de Niveau</div>
+          <p class="text-body" data-i18n="ia.diag_desc">5 questions aléatoires. L'IA analyse et te dit quoi réviser en priorité.</p>
+          <div class="btn-row">
+            <button class="btn btn--ghost btn--sm" id="diagRefreshBtn" data-i18n="ia.diag_refresh">↺ Nouvelles questions</button>
+          </div>
+        </div>
+        <div id="diag-questions"></div>
+        <div class="btn-row mt-8">
+          <button class="btn btn--primary" id="diagSubmitBtn" data-i18n="ia.diag_submit">🤖 Analyser mon niveau</button>
+        </div>
+        <div id="diag-result" class="hidden mt-16">
+          <div class="card card--gradient animate-in">
+            <div class="card-label" style="color:var(--cyan)">📊 Résultat de l'analyse IA</div>
+            <div id="diag-result-content"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Flash Cards -->
+      <div class="ai-sub" id="ia-flash">
+        <div class="card card--gradient">
+          <div class="card-label" data-i18n="ia.flash_title">🔁 Flash Cards IA — Swipe</div>
+          <p class="text-body" data-i18n="ia.flash_desc">L'IA génère des cartes interactives. Clique pour voir la réponse.</p>
+          <div class="flash-options">
+            <select class="select" id="flashChapter">
+              <option value="optique" data-i18n="opt.optics">Optique Géométrique</option>
+              <option value="rayonnement" data-i18n="opt.radiation">Rayonnement</option>
+              <option value="les deux" data-i18n="opt.both">Optique + Rayonnement</option>
+            </select>
+            <select class="select" id="flashDifficulty">
+              <option value="facile" data-i18n="opt.easy">Facile</option>
+              <option value="moyen" selected data-i18n="opt.medium">Moyen</option>
+              <option value="difficile" data-i18n="opt.hard">Difficile</option>
+            </select>
+            <button class="fc-btn fc-btn--gen" id="genFlashBtn" data-i18n="ia.flash_gen">✨ Générer 5 cartes</button>
+          </div>
+        </div>
+        <div id="flash-loading" class="hidden text-center" style="padding:40px;color:var(--cyan)">
+          <div class="loading-spinner"></div>
+          <div class="mt-8" data-i18n="ia.flash_loading">Génération en cours...</div>
+        </div>
+        <div id="flash-container" class="hidden">
+          <div class="fc-pills" id="fc-pills"></div>
+          <div class="fc-stats">
+            <span class="fc-know-count">✓ <span id="fc-know-n">0</span></span>
+            <span class="text-small">Carte <span id="fc-idx">1</span>/5</span>
+            <span class="fc-dk-count">✗ <span id="fc-dk-n">0</span></span>
+          </div>
+          <div class="fc-scene">
+            <div class="fc-card" id="fc-card">
+              <div class="fc-face fc-front">
+                <div class="fc-tag" data-i18n="fc.question">❓ Question</div>
+                <div class="fc-q" id="fc-q">...</div>
+                <div class="fc-tap" data-i18n="fc.tap">Cliquer pour voir la réponse</div>
+              </div>
+              <div class="fc-face fc-back">
+                <div class="fc-tag" data-i18n="fc.answer">✅ Réponse</div>
+                <div class="fc-a" id="fc-a">...</div>
+              </div>
+            </div>
+          </div>
+          <div class="fc-controls">
+            <button class="fc-btn fc-btn--no" id="fcNoBtn" data-i18n="fc.no">✗ À revoir</button>
+            <button class="fc-btn fc-btn--yes" id="fcYesBtn" data-i18n="fc.yes">✓ Je sais</button>
+          </div>
+        </div>
+        <div id="flash-summary" class="hidden"></div>
+        <div id="flash-error" class="hidden mt-12">
+          <div class="alert alert--danger">
+            <span>⚠️</span>
+            <div data-i18n="ia.flash_error">Erreur. <button class="ai-retry-btn" id="flashRetryBtn">↺ Réessayer</button></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Statistiques -->
+      <div class="ai-sub" id="ia-stats">
+        <div class="card card--gradient">
+          <div class="card-label" data-i18n="ia.stats_title">📊 Statistiques Intelligentes</div>
+          <p class="text-body" data-i18n="ia.stats_desc">L'IA analyse toutes tes erreurs et génère un bilan personnalisé.</p>
+          <div class="btn-row">
+            <button class="btn btn--primary" id="statsBtn" data-i18n="ia.stats_gen">🤖 Générer mon bilan</button>
+            <button class="btn btn--ghost btn--sm" id="statsClearBtn" data-i18n="ia.stats_clear">🗑 Effacer erreurs</button>
+          </div>
+        </div>
+        <div id="stats-content" class="mt-12"></div>
+      </div>
+    </section>
+
+  </main>
+</div><!-- .layout -->
+
+<script src="ai.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
