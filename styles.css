@@ -714,3 +714,7 @@ body{
 .justify-between{justify-content:space-between;}
 .text-center{text-align:center;}
 .hidden{display:none!important;}
+.grid-3,
+.grid-4 {
+  grid-template-columns: 1fr !important;
+}
