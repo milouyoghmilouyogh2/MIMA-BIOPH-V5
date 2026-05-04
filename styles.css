@@ -213,7 +213,7 @@ body{
 .main{
   flex:1;
   padding:28px 28px 40px;
-  max-width:900px;
+  max-width:1300px;
   width:100%;
 }
 .page{display:none;animation:pageIn .22s ease;}
@@ -714,7 +714,3 @@ body{
 .justify-between{justify-content:space-between;}
 .text-center{text-align:center;}
 .hidden{display:none!important;}
-.grid-3,
-.grid-4 {
-  grid-template-columns: 1fr !important;
-}
