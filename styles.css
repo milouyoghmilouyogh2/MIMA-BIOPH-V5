@@ -213,7 +213,7 @@ body{
 .main{
   flex:1;
   padding:28px 28px 40px;
-  max-width:1300px;
+  max-width:900px;
   width:100%;
 }
 .page{display:none;animation:pageIn .22s ease;}
@@ -272,10 +272,13 @@ body{
 .grid-3{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;}
 .grid-4{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;}
 @media(max-width:700px){
- .grid-3{grid-template-columns:1fr;}
-.grid-4{grid-template-columns:1fr;}
+  .grid-4{grid-template-columns:1fr 1fr;}
+  .grid-3{grid-template-columns:1fr 1fr;}
 }
-
+.grid-2{display:grid;grid-template-columns:1fr;gap:12px;}
+.grid-2 > * {
+  width: 100%;
+}
 
 /* ════════════════════════════════════════
    STAT CARDS
